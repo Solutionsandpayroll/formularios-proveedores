@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { powerAutomateService } from '../services/powerAutomateService';
+// import { powerAutomateService } from '../services/powerAutomateService';
 import ExcelJS from 'exceljs';
 import Docxtemplater from 'docxtemplater';
 import PizZip from 'pizzip';
@@ -71,7 +71,6 @@ const Formulario2 = () => {
     cargoSeleccionador: '',
     observaciones: '',
   });
-  const [enviando, setEnviando] = useState(false);
   const [registroExitoso, setRegistroExitoso] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
@@ -396,32 +395,6 @@ const Formulario2 = () => {
     setProveedoresEvaluados(nuevaLista);
   };
 
-  const enviarAPoweAutomate = async () => {
-    setEnviando(true);
-    
-    try {
-      // Enviar todos los proveedores evaluados y el resultado
-      const dataToSend = {
-        proveedores: proveedoresEvaluados,
-        mejorProveedor: mejorProveedor,
-        fechaEvaluacion: proveedoresEvaluados[0]?.fechaSeleccion || new Date().toISOString(),
-      };
-
-      const response = await powerAutomateService.submitFormulario2(dataToSend);
-
-      if (response.success) {
-        setRegistroExitoso(true);
-      } else {
-        setError(response.error || 'Error al enviar el formulario');
-      }
-    } catch (err) {
-      console.error('Error:', err);
-      setError('Error al conectar con el servidor. Por favor, intenta nuevamente.');
-    } finally {
-      setEnviando(false);
-    }
-  };
-
   const reiniciarTodo = () => {
     setProveedoresEvaluados([]);
     setMostrarResultados(false);
@@ -441,6 +414,8 @@ const Formulario2 = () => {
       telefonoContacto: '',
       tipoProveedor: '',
       tipo: '',
+      nombreSeleccionador: '',
+      cargoSeleccionador: '',
       plazoPago: '',
       precio: '',
       servicioNecesidad: '',

@@ -195,7 +195,7 @@ const Formulario5 = () => {
     setEnviando(true);
 
     try {
-      const response = await powerAutomateService.submitFormulario5(formData);
+      const response = await powerAutomateService.submitFormulario5(formData as any);
 
       if (response.success) {
         setRegistroExitoso(true);
@@ -208,24 +208,6 @@ const Formulario5 = () => {
     } finally {
       setEnviando(false);
     }
-  };
-
-  const volverAlMenu = () => {
-    setRegistroExitoso(false);
-    setFormData({
-      nombreProveedor: '',
-      identificacion: '',
-      productoServicio: '',
-      responsableReevaluacion: '',
-      fechaEvaluacion: '',
-      cumplimientoEspecificaciones: '',
-      habilidadesConocimientos: '',
-      oportunidadEntrega: '',
-      oportunidadRespuesta: '',
-      calidadProducto: '',
-      resultadoEnviado: '',
-      observaciones: '',
-    });
   };
 
   const registrarOtro = () => {

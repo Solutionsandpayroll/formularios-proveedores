@@ -222,7 +222,7 @@ const Formulario3 = () => {
       // Transformar cuatrimestre a trimestre para compatibilidad con Excel
       // Crear clave única para identificar la fila (Responsable_Proveedor_Año)
       const añoActual = new Date().getFullYear();
-      const dataParaEnviar = {
+      const dataParaEnviar: any = {
         ...formData,
         trimestre: formData.cuatrimestre,
         claveSeguimiento: `${formData.responsableSeguimiento}_${formData.nombreProveedor}_${añoActual}`
@@ -243,28 +243,11 @@ const Formulario3 = () => {
     }
   };
 
-  const volverAlMenu = () => {
+  const registrarOtro = () => {
     setRegistroExitoso(false);
     setCuatrimestreSeleccionado('');
     setFormData({
       cuatrimestre: '',
-      nombreProveedor: '',
-      identificacion: '',
-      productoServicio: '',
-      responsableSeguimiento: '',
-      fechaSeleccion: '',
-      fechaSeguimiento: '',
-      cumplimientoEspecificaciones: '',
-      oportunidadEntrega: '',
-      calidadProducto: '',
-      observaciones: '',
-    });
-  };
-
-  const registrarOtro = () => {
-    setRegistroExitoso(false);
-    setFormData({
-      ...formData,
       nombreProveedor: '',
       identificacion: '',
       productoServicio: '',

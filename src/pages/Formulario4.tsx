@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import ExcelJS from 'exceljs';
 import Docxtemplater from 'docxtemplater';
@@ -72,7 +72,6 @@ const Formulario4 = () => {
   const [mostrarResultados, setMostrarResultados] = useState(false);
   const [puntajeTotal, setPuntajeTotal] = useState(0);
   const [aprueba, setAprueba] = useState(false);
-  const [enviando, setEnviando] = useState(false);
   const [registroExitoso, setRegistroExitoso] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [archivoInforme, setArchivoInforme] = useState<File | null>(null);
@@ -852,32 +851,6 @@ const Formulario4 = () => {
     );
   }
 
-  const handleSubmitOld = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setError(null);
-
-    if (!validateForm()) {
-      return;
-    }
-
-    setEnviando(true);
-
-    try {
-      const response = await powerAutomateService.submitFormulario4(formData);
-
-      if (response.success) {
-        setRegistroExitoso(true);
-      } else {
-        setError(response.error || 'Error al enviar el formulario');
-      }
-    } catch (err) {
-      console.error('Error:', err);
-      setError('Error al conectar con el servidor. Por favor, intenta nuevamente.');
-    } finally {
-      setEnviando(false);
-    }
-  };
-
   const registrarOtro = () => {
     setRegistroExitoso(false);
     setFormData({
@@ -891,6 +864,8 @@ const Formulario4 = () => {
       nombreContacto: '',
       cargoContacto: '',
       correoContacto: '',
+      nombreSeleccionador: '',
+      cargoSeleccionador: '',
       celularContacto: '',
       telefonoContacto: '',
       tipoProveedor: '',
