@@ -66,6 +66,12 @@ export interface BaseFormData {
   reevaluador4: string;
   reevaluador5: string;
   reevaluador6: string;
+  seguimiento1: string;
+  seguimiento2: string;
+  seguimiento3: string;
+  seguimiento4: string;
+  seguimiento5: string;
+  seguimiento6: string;
 }
 
 export interface FormularioData {

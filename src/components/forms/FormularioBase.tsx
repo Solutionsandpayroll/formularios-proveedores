@@ -46,6 +46,12 @@ const FormularioBase = () => {
     reevaluador4: '',
     reevaluador5: '',
     reevaluador6: '',
+    seguimiento1: '',
+    seguimiento2: '',
+    seguimiento3: '',
+    seguimiento4: '',
+    seguimiento5: '',
+    seguimiento6: '',
   });
 
   const [errors, setErrors] = useState<Partial<Record<keyof BaseFormData, string>>>({});
@@ -154,6 +160,12 @@ const FormularioBase = () => {
           reevaluador4: '',
           reevaluador5: '',
           reevaluador6: '',
+          seguimiento1: '',
+          seguimiento2: '',
+          seguimiento3: '',
+          seguimiento4: '',
+          seguimiento5: '',
+          seguimiento6: '',
         });
       } else {
         setMessage({ 
@@ -821,6 +833,109 @@ const FormularioBase = () => {
                 onChange={handleChange}
                 className="form-input"
                 placeholder="Nombre del reevaluador 6"
+              />
+            </div>
+          </div>
+        </div>
+
+        <div className="form-section">
+          <h2>Seguimiento</h2>
+          <p className="section-description">
+            Asigne hasta 6 responsables de seguimiento para este proveedor
+          </p>
+          
+          <div className="form-row">
+            <div className="form-group">
+              <label htmlFor="seguimiento1" className="form-label">
+                Seguimiento 1
+              </label>
+              <input
+                type="text"
+                id="seguimiento1"
+                name="seguimiento1"
+                value={formData.seguimiento1}
+                onChange={handleChange}
+                className="form-input"
+                placeholder="Nombre del responsable de seguimiento 1"
+              />
+            </div>
+
+            <div className="form-group">
+              <label htmlFor="seguimiento2" className="form-label">
+                Seguimiento 2
+              </label>
+              <input
+                type="text"
+                id="seguimiento2"
+                name="seguimiento2"
+                value={formData.seguimiento2}
+                onChange={handleChange}
+                className="form-input"
+                placeholder="Nombre del responsable de seguimiento 2"
+              />
+            </div>
+          </div>
+
+          <div className="form-row">
+            <div className="form-group">
+              <label htmlFor="seguimiento3" className="form-label">
+                Seguimiento 3
+              </label>
+              <input
+                type="text"
+                id="seguimiento3"
+                name="seguimiento3"
+                value={formData.seguimiento3}
+                onChange={handleChange}
+                className="form-input"
+                placeholder="Nombre del responsable de seguimiento 3"
+              />
+            </div>
+
+            <div className="form-group">
+              <label htmlFor="seguimiento4" className="form-label">
+                Seguimiento 4
+              </label>
+              <input
+                type="text"
+                id="seguimiento4"
+                name="seguimiento4"
+                value={formData.seguimiento4}
+                onChange={handleChange}
+                className="form-input"
+                placeholder="Nombre del responsable de seguimiento 4"
+              />
+            </div>
+          </div>
+
+          <div className="form-row">
+            <div className="form-group">
+              <label htmlFor="seguimiento5" className="form-label">
+                Seguimiento 5
+              </label>
+              <input
+                type="text"
+                id="seguimiento5"
+                name="seguimiento5"
+                value={formData.seguimiento5}
+                onChange={handleChange}
+                className="form-input"
+                placeholder="Nombre del responsable de seguimiento 5"
+              />
+            </div>
+
+            <div className="form-group">
+              <label htmlFor="seguimiento6" className="form-label">
+                Seguimiento 6
+              </label>
+              <input
+                type="text"
+                id="seguimiento6"
+                name="seguimiento6"
+                value={formData.seguimiento6}
+                onChange={handleChange}
+                className="form-input"
+                placeholder="Nombre del responsable de seguimiento 6"
               />
             </div>
           </div>
