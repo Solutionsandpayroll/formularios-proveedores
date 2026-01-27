@@ -808,7 +808,7 @@ const Formulario4 = () => {
                 marginBottom: '1rem'
               }}
             >
-              ☁️ Guardar en OneDrive
+              📧 Enviar el resultado a la persona encargada
             </button>
           </div>
 
