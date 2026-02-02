@@ -15,7 +15,7 @@ const Dashboard = () => {
             />
             <div className="header-text">
               <h1 className="company-name">Solutions & Payroll</h1>
-              <p className="company-tagline">Soluciones empresariales integrales</p>
+              <p className="company-tagline">Soluciones tecnológicamente humanas</p>
             </div>
           </div>
           <div className="header-right">

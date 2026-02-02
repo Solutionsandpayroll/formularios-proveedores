@@ -34,7 +34,7 @@ export interface Cliente {
 
 export interface BaseFormData {
   categoria: string;
-  esCritico: 'Si' | 'No';
+  esCritico: 'CRÍTICO' | 'NO CRÍTICO';
   anioVinculacion: string;
   nombreProveedor: string;
   identificacion: string;
@@ -49,8 +49,11 @@ export interface BaseFormData {
   certificadoBancario: string;
   copiaCedulaRepLegal: string;
   autorizacionDatos: string;
-  soportesSeguridadSocial: string;
-  hojaVidaSoportes: string;
+  balances: string;
+  ofertaComercial: string;
+  planContinuidad: string;
+  contratoEquivalente: string;
+  certificadoSGSST: string;
   documentosAdicionales: string;
   fechaSeleccion: string;
   observaciones: string;

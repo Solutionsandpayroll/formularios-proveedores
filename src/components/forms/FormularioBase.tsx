@@ -14,7 +14,7 @@ const FormularioBase = () => {
   
   const [formData, setFormData] = useState<BaseFormData>({
     categoria: '',
-    esCritico: 'No',
+    esCritico: 'NO CRÍTICO',
     anioVinculacion: '',
     nombreProveedor: '',
     identificacion: '',
@@ -29,8 +29,11 @@ const FormularioBase = () => {
     certificadoBancario: '',
     copiaCedulaRepLegal: '',
     autorizacionDatos: '',
-    soportesSeguridadSocial: '',
-    hojaVidaSoportes: '',
+    balances: '',
+    ofertaComercial: '',
+    planContinuidad: '',
+    contratoEquivalente: '',
+    certificadoSGSST: '',
     documentosAdicionales: '',
     fechaSeleccion: new Date().toISOString().split('T')[0],
     observaciones: '',
@@ -128,7 +131,7 @@ const FormularioBase = () => {
         // Limpiar formulario
         setFormData({
           categoria: '',
-          esCritico: 'No',
+          esCritico: 'NO CRÍTICO',
           anioVinculacion: '',
           nombreProveedor: '',
           identificacion: '',
@@ -143,8 +146,11 @@ const FormularioBase = () => {
           certificadoBancario: '',
           copiaCedulaRepLegal: '',
           autorizacionDatos: '',
-          soportesSeguridadSocial: '',
-          hojaVidaSoportes: '',
+          balances: '',
+          ofertaComercial: '',
+          planContinuidad: '',
+          contratoEquivalente: '',
+          certificadoSGSST: '',
           documentosAdicionales: '',
           fechaSeleccion: new Date().toISOString().split('T')[0],
           observaciones: '',
@@ -288,8 +294,8 @@ const FormularioBase = () => {
                 onChange={handleChange}
                 className="form-select"
               >
-                <option value="No">No</option>
-                <option value="Si">Si</option>
+                <option value="NO CRÍTICO">NO CRÍTICO</option>
+                <option value="CRÍTICO">CRÍTICO</option>
               </select>
             </div>
 
@@ -471,30 +477,36 @@ const FormularioBase = () => {
               <label htmlFor="camaraComercio" className="form-label">
                 Cámara de Comercio
               </label>
-              <input
-                type="text"
+              <select
                 id="camaraComercio"
                 name="camaraComercio"
                 value={formData.camaraComercio}
                 onChange={handleChange}
-                className="form-input"
-                placeholder="Número de matrícula"
-              />
+                className="form-select"
+              >
+                <option value="">Seleccione una opción</option>
+                <option value="Si">Si</option>
+                <option value="No">No</option>
+                <option value="No aplica">No aplica</option>
+              </select>
             </div>
 
             <div className="form-group">
               <label htmlFor="rut" className="form-label">
                 RUT
               </label>
-              <input
-                type="text"
+              <select
                 id="rut"
                 name="rut"
                 value={formData.rut}
                 onChange={handleChange}
-                className="form-input"
-                placeholder="Número de RUT"
-              />
+                className="form-select"
+              >
+                <option value="">Seleccione una opción</option>
+                <option value="Si">Si</option>
+                <option value="No">No</option>
+                <option value="No aplica">No aplica</option>
+              </select>
             </div>
           </div>
 
@@ -503,30 +515,36 @@ const FormularioBase = () => {
               <label htmlFor="certificadoBancario" className="form-label">
                 Certificado Bancario
               </label>
-              <input
-                type="text"
+              <select
                 id="certificadoBancario"
                 name="certificadoBancario"
                 value={formData.certificadoBancario}
                 onChange={handleChange}
-                className="form-input"
-                placeholder="Indicar si está adjunto"
-              />
+                className="form-select"
+              >
+                <option value="">Seleccione una opción</option>
+                <option value="Si">Si</option>
+                <option value="No">No</option>
+                <option value="No aplica">No aplica</option>
+              </select>
             </div>
 
             <div className="form-group">
               <label htmlFor="copiaCedulaRepLegal" className="form-label">
                 Copia Cédula Rep. Legal
               </label>
-              <input
-                type="text"
+              <select
                 id="copiaCedulaRepLegal"
                 name="copiaCedulaRepLegal"
                 value={formData.copiaCedulaRepLegal}
                 onChange={handleChange}
-                className="form-input"
-                placeholder="Indicar si está adjunto"
-              />
+                className="form-select"
+              >
+                <option value="">Seleccione una opción</option>
+                <option value="Si">Si</option>
+                <option value="No">No</option>
+                <option value="No aplica">No aplica</option>
+              </select>
             </div>
           </div>
 
@@ -535,63 +553,128 @@ const FormularioBase = () => {
               <label htmlFor="autorizacionDatos" className="form-label">
                 Autorización Tratamiento de Datos Personales
               </label>
-              <input
-                type="text"
+              <select
                 id="autorizacionDatos"
                 name="autorizacionDatos"
                 value={formData.autorizacionDatos}
                 onChange={handleChange}
-                className="form-input"
-                placeholder="Indicar si está adjunto"
-              />
+                className="form-select"
+              >
+                <option value="">Seleccione una opción</option>
+                <option value="Si">Si</option>
+                <option value="No">No</option>
+                <option value="No aplica">No aplica</option>
+              </select>
             </div>
 
             <div className="form-group">
-              <label htmlFor="soportesSeguridadSocial" className="form-label">
-                Soportes Seguridad Social
+              <label htmlFor="balances" className="form-label">
+                Balances
               </label>
-              <input
-                type="text"
-                id="soportesSeguridadSocial"
-                name="soportesSeguridadSocial"
-                value={formData.soportesSeguridadSocial}
+              <select
+                id="balances"
+                name="balances"
+                value={formData.balances}
                 onChange={handleChange}
-                className="form-input"
-                placeholder="Indicar si está adjunto"
-              />
+                className="form-select"
+              >
+                <option value="">Seleccione una opción</option>
+                <option value="Si">Si</option>
+                <option value="No">No</option>
+                <option value="No aplica">No aplica</option>
+              </select>
             </div>
           </div>
 
           <div className="form-row">
             <div className="form-group">
-              <label htmlFor="hojaVidaSoportes" className="form-label">
-                Hoja de Vida y Soportes
+              <label htmlFor="ofertaComercial" className="form-label">
+                Oferta Comercial
               </label>
-              <input
-                type="text"
-                id="hojaVidaSoportes"
-                name="hojaVidaSoportes"
-                value={formData.hojaVidaSoportes}
+              <select
+                id="ofertaComercial"
+                name="ofertaComercial"
+                value={formData.ofertaComercial}
                 onChange={handleChange}
-                className="form-input"
-                placeholder="Indicar si está adjunto"
-              />
+                className="form-select"
+              >
+                <option value="">Seleccione una opción</option>
+                <option value="Si">Si</option>
+                <option value="No">No</option>
+                <option value="No aplica">No aplica</option>
+              </select>
             </div>
 
             <div className="form-group">
-              <label htmlFor="documentosAdicionales" className="form-label">
-                Documentos Adicionales
+              <label htmlFor="planContinuidad" className="form-label">
+                Plan Continuidad
               </label>
-              <input
-                type="text"
-                id="documentosAdicionales"
-                name="documentosAdicionales"
-                value={formData.documentosAdicionales}
+              <select
+                id="planContinuidad"
+                name="planContinuidad"
+                value={formData.planContinuidad}
                 onChange={handleChange}
-                className="form-input"
-                placeholder="Indicar documentos adicionales"
-              />
+                className="form-select"
+              >
+                <option value="">Seleccione una opción</option>
+                <option value="Si">Si</option>
+                <option value="No">No</option>
+                <option value="No aplica">No aplica</option>
+              </select>
             </div>
+          </div>
+
+          <div className="form-row">
+            <div className="form-group">
+              <label htmlFor="contratoEquivalente" className="form-label">
+                Contrato o equivalente
+              </label>
+              <select
+                id="contratoEquivalente"
+                name="contratoEquivalente"
+                value={formData.contratoEquivalente}
+                onChange={handleChange}
+                className="form-select"
+              >
+                <option value="">Seleccione una opción</option>
+                <option value="Si">Si</option>
+                <option value="No">No</option>
+                <option value="No aplica">No aplica</option>
+              </select>
+            </div>
+
+            <div className="form-group">
+              <label htmlFor="certificadoSGSST" className="form-label">
+                Certificado SG-SST
+              </label>
+              <select
+                id="certificadoSGSST"
+                name="certificadoSGSST"
+                value={formData.certificadoSGSST}
+                onChange={handleChange}
+                className="form-select"
+              >
+                <option value="">Seleccione una opción</option>
+                <option value="Si">Si</option>
+                <option value="No">No</option>
+                <option value="No aplica">No aplica</option>
+              </select>
+            </div>
+          </div>
+
+          <div className="form-group">
+            <label htmlFor="documentosAdicionales" className="form-label">
+              Documentos Adicionales
+            </label>
+            <input
+              type="text"
+              id="documentosAdicionales"
+              name="documentosAdicionales"
+              value={formData.documentosAdicionales}
+              onChange={handleChange}
+              className="form-input"
+              placeholder="Indicar documentos adicionales"
+            />
           </div>
         </div>
 
