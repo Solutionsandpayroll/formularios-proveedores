@@ -503,7 +503,7 @@ const Formulario5 = () => {
         <div className="form-section">
           <h2>Información Adicional</h2>
           
-          <div className="form-group">
+          <div className="form-group" style={{ display: 'none' }}>
             <label htmlFor="resultadoEnviado">¿Se envió el resultado de la evaluación? *</label>
             <select
               id="resultadoEnviado"
