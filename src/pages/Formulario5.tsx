@@ -15,7 +15,6 @@ interface ReevaluacionFormData {
   oportunidadEntrega: string;
   oportunidadRespuesta: string;
   calidadProducto: string;
-  resultadoEnviado: string;
   observaciones: string;
 }
 
@@ -36,7 +35,6 @@ const Formulario5 = () => {
     oportunidadEntrega: '',
     oportunidadRespuesta: '',
     calidadProducto: '',
-    resultadoEnviado: '',
     observaciones: '',
   });
   const [enviando, setEnviando] = useState(false);
@@ -177,10 +175,6 @@ const Formulario5 = () => {
       setError('La calidad del producto/servicio es requerida');
       return false;
     }
-    if (!formData.resultadoEnviado) {
-      setError('Debe indicar si se envió el resultado');
-      return false;
-    }
     return true;
   };
 
@@ -223,7 +217,6 @@ const Formulario5 = () => {
       oportunidadEntrega: '',
       oportunidadRespuesta: '',
       calidadProducto: '',
-      resultadoEnviado: '',
       observaciones: '',
     });
   };
@@ -503,21 +496,6 @@ const Formulario5 = () => {
         <div className="form-section">
           <h2>Información Adicional</h2>
           
-          <div className="form-group" style={{ display: 'none' }}>
-            <label htmlFor="resultadoEnviado">¿Se envió el resultado de la evaluación? *</label>
-            <select
-              id="resultadoEnviado"
-              name="resultadoEnviado"
-              value={formData.resultadoEnviado}
-              onChange={handleInputChange}
-              className="form-input"
-              required
-            >
-              <option value="">Seleccione una opción</option>
-              <option value="Si">Sí</option>
-              <option value="No">No</option>
-            </select>
-          </div>
 
           <div className="form-group">
             <label htmlFor="observaciones">Observaciones</label>
