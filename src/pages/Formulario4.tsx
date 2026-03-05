@@ -224,12 +224,12 @@ const Formulario4 = () => {
       }
 
       // Extraer datos del Excel
-      const nombreProveedor = worksheet.getCell('A6').value || '';
-      const promedioF23 = worksheet.getCell('F23').value || 0;
-      const promedioF24 = worksheet.getCell('F24').value || 0;
-      const promedioF25 = worksheet.getCell('F25').value || 0;
-      const promedioF26 = worksheet.getCell('F26').value || 0;
-      const promedioF27 = worksheet.getCell('F27').value || 0;
+      const nombreProveedor = worksheet.getCell('A4').value || '';
+      const promedioF23 = worksheet.getCell('F20').value || 0;
+      const promedioF24 = worksheet.getCell('F21').value || 0;
+      const promedioF25 = worksheet.getCell('F22').value || 0;
+      const promedioF26 = worksheet.getCell('F23').value || 0;
+      const promedioF27 = worksheet.getCell('F24').value || 0;
 
       // Calcular puntaje total (promedio de los 5 criterios)
       const puntajeFinal = (
@@ -332,14 +332,14 @@ const Formulario4 = () => {
           const worksheet = workbook.worksheets[0];
 
           if (worksheet) {
-            const valorF23 = worksheet.getCell('F23').value;
-            const valorF24 = worksheet.getCell('F24').value;
-            const valorF25 = worksheet.getCell('F25').value;
-            const valorF26 = worksheet.getCell('F26').value;
-            const valorF27 = worksheet.getCell('F27').value;
-            const valorA30 = worksheet.getCell('A30').value;
-            const valorE30 = worksheet.getCell('E30').value;
-            const valorA36 = worksheet.getCell('A36').value;
+            const valorF23 = worksheet.getCell('F20').value;
+            const valorF24 = worksheet.getCell('F21').value;
+            const valorF25 = worksheet.getCell('F22').value;
+            const valorF26 = worksheet.getCell('F23').value;
+            const valorF27 = worksheet.getCell('F24').value;
+            const valorA30 = worksheet.getCell('A27').value;
+            const valorE30 = worksheet.getCell('E27').value;
+            const valorA36 = worksheet.getCell('A31').value;
 
             console.log('Valores extraídos:', { valorF23, valorF24, valorF25, valorF26, valorF27, valorA30, valorE30, valorA36 });
 
@@ -361,21 +361,21 @@ const Formulario4 = () => {
             // Si es el primer archivo, guardar valores adicionales para copiar al resultado
             if (i === 0) {
               datosDelPrimerArchivo = {
-                C4: worksheet.getCell('C4').value,
+                C2: worksheet.getCell('C2').value,
+                A4: worksheet.getCell('A4').value,
+                F4: worksheet.getCell('F4').value,
                 A6: worksheet.getCell('A6').value,
+                D6: worksheet.getCell('D6').value,
                 A8: worksheet.getCell('A8').value,
-                E8: worksheet.getCell('E8').value,
-                G8: worksheet.getCell('G8').value,
-                A10: worksheet.getCell('A10').value,
+                A12: worksheet.getCell('A12').value,
+                E12: worksheet.getCell('E12').value,
                 A14: worksheet.getCell('A14').value,
                 E14: worksheet.getCell('E14').value,
-                A16: worksheet.getCell('A16').value,
-                E16: worksheet.getCell('E16').value,
+                G14: worksheet.getCell('G14').value,
+                D16: worksheet.getCell('D16').value,
                 G16: worksheet.getCell('G16').value,
-                D18: worksheet.getCell('D18').value,
-                G18: worksheet.getCell('G18').value,
-                D19: worksheet.getCell('D19').value,
-                G19: worksheet.getCell('G19').value
+                D17: worksheet.getCell('D17').value,
+                G17: worksheet.getCell('G17').value
               };
               console.log('Datos del primer archivo guardados:', datosDelPrimerArchivo);
             }
@@ -433,60 +433,46 @@ const Formulario4 = () => {
       }
 
       // Escribir los promedios redondeados a 1 decimal
-      worksheet.getCell('F23').value = Math.round(promedioF23 * 10) / 10;
-      worksheet.getCell('F24').value = Math.round(promedioF24 * 10) / 10;
-      worksheet.getCell('F25').value = Math.round(promedioF25 * 10) / 10;
-      worksheet.getCell('F26').value = Math.round(promedioF26 * 10) / 10;
-      worksheet.getCell('F27').value = Math.round(promedioF27 * 10) / 10;
+      worksheet.getCell('F20').value = Math.round(promedioF23 * 10) / 10;
+      worksheet.getCell('F21').value = Math.round(promedioF24 * 10) / 10;
+      worksheet.getCell('F22').value = Math.round(promedioF25 * 10) / 10;
+      worksheet.getCell('F23').value = Math.round(promedioF26 * 10) / 10;
+      worksheet.getCell('F24').value = Math.round(promedioF27 * 10) / 10;
 
-      // Escribir todos los valores de A30 concatenados con saltos de línea
+      // Escribir todos los valores de A27 (nombres evaluadores) concatenados con saltos de línea
       if (valoresA30.length > 0) {
-        worksheet.getCell('A30').value = valoresA30.join('\n');
-        // Habilitar text wrap para que se vean los saltos de línea
-        worksheet.getCell('A30').alignment = { wrapText: true, vertical: 'top' };
+        worksheet.getCell('A27').value = valoresA30.join('\n');
+        worksheet.getCell('A27').alignment = { wrapText: true, vertical: 'top' };
       }
 
-      // Escribir todos los valores de E30 concatenados con saltos de línea
+      // Escribir todos los valores de E27 (cargos evaluadores) concatenados con saltos de línea
       if (valoresE30.length > 0) {
-        worksheet.getCell('E30').value = valoresE30.join('\n');
-        // Habilitar text wrap para que se vean los saltos de línea
-        worksheet.getCell('E30').alignment = { wrapText: true, vertical: 'top' };
+        worksheet.getCell('E27').value = valoresE30.join('\n');
+        worksheet.getCell('E27').alignment = { wrapText: true, vertical: 'top' };
       }
 
-      // Escribir todos los valores de A36 (observaciones) concatenados con saltos de línea
+      // Escribir todos los valores de A31 (observaciones) concatenados con saltos de línea
       if (valoresA36.length > 0) {
-        worksheet.getCell('A36').value = valoresA36.join('\n');
-        // Habilitar text wrap para que se vean los saltos de línea
-        worksheet.getCell('A36').alignment = { wrapText: true, vertical: 'top' };
+        worksheet.getCell('A31').value = valoresA36.join('\n');
+        worksheet.getCell('A31').alignment = { wrapText: true, vertical: 'top' };
       }
 
       // Copiar valores del primer archivo al resultado
-      if (datosDelPrimerArchivo.C4 !== undefined) worksheet.getCell('C4').value = datosDelPrimerArchivo.C4;
+      if (datosDelPrimerArchivo.C2 !== undefined) worksheet.getCell('C2').value = datosDelPrimerArchivo.C2;
+      if (datosDelPrimerArchivo.A4 !== undefined) worksheet.getCell('A4').value = datosDelPrimerArchivo.A4;
+      if (datosDelPrimerArchivo.F4 !== undefined) worksheet.getCell('F4').value = datosDelPrimerArchivo.F4;
       if (datosDelPrimerArchivo.A6 !== undefined) worksheet.getCell('A6').value = datosDelPrimerArchivo.A6;
+      if (datosDelPrimerArchivo.D6 !== undefined) worksheet.getCell('D6').value = datosDelPrimerArchivo.D6;
       if (datosDelPrimerArchivo.A8 !== undefined) worksheet.getCell('A8').value = datosDelPrimerArchivo.A8;
-      if (datosDelPrimerArchivo.E8 !== undefined) worksheet.getCell('E8').value = datosDelPrimerArchivo.E8;
-      if (datosDelPrimerArchivo.G8 !== undefined) worksheet.getCell('G8').value = datosDelPrimerArchivo.G8;
-      if (datosDelPrimerArchivo.A10 !== undefined) worksheet.getCell('A10').value = datosDelPrimerArchivo.A10;
+      if (datosDelPrimerArchivo.A12 !== undefined) worksheet.getCell('A12').value = datosDelPrimerArchivo.A12;
+      if (datosDelPrimerArchivo.E12 !== undefined) worksheet.getCell('E12').value = datosDelPrimerArchivo.E12;
       if (datosDelPrimerArchivo.A14 !== undefined) worksheet.getCell('A14').value = datosDelPrimerArchivo.A14;
       if (datosDelPrimerArchivo.E14 !== undefined) worksheet.getCell('E14').value = datosDelPrimerArchivo.E14;
-      if (datosDelPrimerArchivo.A16 !== undefined) worksheet.getCell('A16').value = datosDelPrimerArchivo.A16;
-      if (datosDelPrimerArchivo.E16 !== undefined) worksheet.getCell('E16').value = datosDelPrimerArchivo.E16;
+      if (datosDelPrimerArchivo.G14 !== undefined) worksheet.getCell('G14').value = datosDelPrimerArchivo.G14;
+      if (datosDelPrimerArchivo.D16 !== undefined) worksheet.getCell('D16').value = datosDelPrimerArchivo.D16;
       if (datosDelPrimerArchivo.G16 !== undefined) worksheet.getCell('G16').value = datosDelPrimerArchivo.G16;
-      if (datosDelPrimerArchivo.D18 !== undefined) worksheet.getCell('D18').value = datosDelPrimerArchivo.D18;
-      if (datosDelPrimerArchivo.G18 !== undefined) worksheet.getCell('G18').value = datosDelPrimerArchivo.G18;
-      if (datosDelPrimerArchivo.D19 !== undefined) worksheet.getCell('D19').value = datosDelPrimerArchivo.D19;
-      if (datosDelPrimerArchivo.G19 !== undefined) worksheet.getCell('G19').value = datosDelPrimerArchivo.G19;
-
-      // Escribir fecha actual en I4 en formato largo español
-      const fechaActual = new Date();
-      const opciones: Intl.DateTimeFormatOptions = { 
-        weekday: 'long', 
-        year: 'numeric', 
-        month: 'long', 
-        day: 'numeric' 
-      };
-      const fechaFormateada = fechaActual.toLocaleDateString('es-ES', opciones);
-      worksheet.getCell('I4').value = fechaFormateada;
+      if (datosDelPrimerArchivo.D17 !== undefined) worksheet.getCell('D17').value = datosDelPrimerArchivo.D17;
+      if (datosDelPrimerArchivo.G17 !== undefined) worksheet.getCell('G17').value = datosDelPrimerArchivo.G17;
 
       // Generar archivo
       const buffer = await workbook.xlsx.writeBuffer();
@@ -629,8 +615,7 @@ const Formulario4 = () => {
         throw new Error('No se encontró la hoja de trabajo');
       }
       
-      // Formatear fechas en formato largo español
-      const fechaPrest = new Date(formData.fechaPrestacion + 'T00:00:00');
+      // Formatear fecha de evaluación en formato largo español
       const fechaEval = new Date(formData.fechaEvaluacion + 'T00:00:00');
       const opciones: Intl.DateTimeFormatOptions = { 
         weekday: 'long', 
@@ -638,52 +623,50 @@ const Formulario4 = () => {
         month: 'long', 
         day: 'numeric' 
       };
-      const fechaPrestFormateada = fechaPrest.toLocaleDateString('es-ES', opciones);
       const fechaEvalFormateada = fechaEval.toLocaleDateString('es-ES', opciones);
       
       // Llenar las celdas
-      worksheet.getCell('C4').value = fechaPrestFormateada;
-      worksheet.getCell('I4').value = fechaEvalFormateada;
-      worksheet.getCell('A6').value = formData.nombreRazonSocial;
-      worksheet.getCell('A8').value = formData.direccion;
-      worksheet.getCell('E8').value = formData.ciudad;
-      worksheet.getCell('G8').value = formData.nit;
-      worksheet.getCell('A10').value = formData.bienServicio;
+      worksheet.getCell('C2').value = fechaEvalFormateada;
+      worksheet.getCell('A4').value = formData.nombreRazonSocial;
+      worksheet.getCell('F4').value = formData.nit;
+      worksheet.getCell('A6').value = formData.direccion;
+      worksheet.getCell('D6').value = formData.ciudad;
+      worksheet.getCell('A8').value = formData.bienServicio;
       
       // Datos de contacto
-      worksheet.getCell('A14').value = formData.nombreContacto;
-      worksheet.getCell('E14').value = formData.cargoContacto;
-      worksheet.getCell('A16').value = formData.correoContacto;
-      worksheet.getCell('E16').value = formData.celularContacto;
-      worksheet.getCell('G16').value = formData.telefonoContacto;
+      worksheet.getCell('A12').value = formData.nombreContacto;
+      worksheet.getCell('E12').value = formData.cargoContacto;
+      worksheet.getCell('A14').value = formData.correoContacto;
+      worksheet.getCell('E14').value = formData.celularContacto;
+      worksheet.getCell('G14').value = formData.telefonoContacto;
       
       // Tipo de proveedor
       if (formData.tipoProveedor === 'Persona Natural') {
-        worksheet.getCell('D18').value = 'X';
+        worksheet.getCell('D16').value = 'X';
       } else if (formData.tipoProveedor === 'Persona Jurídica') {
-        worksheet.getCell('G18').value = 'X';
+        worksheet.getCell('G16').value = 'X';
       }
       
       // Tipo (Servicio/Producto)
       if (formData.tipo === 'Servicio') {
-        worksheet.getCell('D19').value = 'X';
+        worksheet.getCell('D17').value = 'X';
       } else if (formData.tipo === 'Producto') {
-        worksheet.getCell('G19').value = 'X';
+        worksheet.getCell('G17').value = 'X';
       }
       
-      // Criterios de evaluación (F23 a F27)
-      worksheet.getCell('F23').value = parseInt(formData.cumplimientoEspecificaciones || '0');
-      worksheet.getCell('F24').value = parseInt(formData.habilidadesConocimientos || '0');
-      worksheet.getCell('F25').value = parseInt(formData.oportunidadEntrega || '0');
-      worksheet.getCell('F26').value = parseInt(formData.oportunidadRespuesta || '0');
-      worksheet.getCell('F27').value = parseInt(formData.calidadProducto || '0');
+      // Criterios de evaluación (F20 a F24)
+      worksheet.getCell('F20').value = parseInt(formData.cumplimientoEspecificaciones || '0');
+      worksheet.getCell('F21').value = parseInt(formData.habilidadesConocimientos || '0');
+      worksheet.getCell('F22').value = parseInt(formData.oportunidadEntrega || '0');
+      worksheet.getCell('F23').value = parseInt(formData.oportunidadRespuesta || '0');
+      worksheet.getCell('F24').value = parseInt(formData.calidadProducto || '0');
       
-      // Datos de quien selecciona
-      worksheet.getCell('A30').value = formData.nombreSeleccionador;
-      worksheet.getCell('E30').value = formData.cargoSeleccionador;
+      // Datos de quien evalúa
+      worksheet.getCell('A27').value = formData.nombreSeleccionador;
+      worksheet.getCell('E27').value = formData.cargoSeleccionador;
       
       // Observaciones
-      worksheet.getCell('A36').value = formData.observaciones;
+      worksheet.getCell('A31').value = formData.observaciones;
       
       // Generar buffer del Excel
       const buffer = await workbook.xlsx.writeBuffer();
