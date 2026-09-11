@@ -25,6 +25,7 @@ export interface Cliente {
   SEGUIMIENTO5?: string;
   SEGUIMIENTO6?: string;
   'DIRECCIÓN'?: string;
+  PAIS?: string;
   'CIUDAD'?: string;
   'CONTACTO'?: string;
   'E-MAIL'?: string;
@@ -42,6 +43,7 @@ export interface BaseFormData {
   telefonos: string;
   email: string;
   contacto: string;
+  pais: string;
   ciudad: string;
   productoServicio: string;
   camaraComercio: string;

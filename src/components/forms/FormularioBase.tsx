@@ -6,8 +6,33 @@ import type { BaseFormData } from '../../types';
 import { validateRequired, validateEmail } from '../../utils/validation';
 import './FormularioBase.css';
 
+const PAISES = [
+  'Colombia',
+  'Argentina',
+  'Bolivia',
+  'Brasil',
+  'Chile',
+  'Costa Rica',
+  'Ecuador',
+  'El Salvador',
+  'España',
+  'Guatemala',
+  'Honduras',
+  'México',
+  'Nicaragua',
+  'Panamá',
+  'Paraguay',
+  'Perú',
+  'República Dominicana',
+  'Singapur',
+  'Uruguay',
+  'Venezuela',
+  'Estados Unidos',
+];
+
 const FormularioBase = () => {
   const navigate = useNavigate();
+  const [paisOtro, setPaisOtro] = useState(false);
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState<{ type: 'success' | 'error'; text: string } | null>(null);
   const [registroExitoso, setRegistroExitoso] = useState(false);
@@ -22,6 +47,7 @@ const FormularioBase = () => {
     telefonos: '',
     email: '',
     contacto: '',
+    pais: '',
     ciudad: '',
     productoServicio: '',
     camaraComercio: '',
@@ -100,6 +126,10 @@ const FormularioBase = () => {
       newErrors.contacto = 'El contacto es obligatorio';
     }
 
+    if (!validateRequired(formData.pais)) {
+      newErrors.pais = 'El país es obligatorio';
+    }
+
     if (!validateRequired(formData.ciudad)) {
       newErrors.ciudad = 'La ciudad es obligatoria';
     }
@@ -139,6 +169,7 @@ const FormularioBase = () => {
           telefonos: '',
           email: '',
           contacto: '',
+          pais: '',
           ciudad: '',
           productoServicio: '',
           camaraComercio: '',
@@ -173,6 +204,7 @@ const FormularioBase = () => {
           seguimiento5: '',
           seguimiento6: '',
         });
+        setPaisOtro(false);
       } else {
         setMessage({ 
           type: 'error', 
@@ -351,6 +383,52 @@ const FormularioBase = () => {
               />
               {errors.identificacion && (
                 <span className="form-error">{errors.identificacion}</span>
+              )}
+            </div>
+
+            <div className="form-group">
+              <label htmlFor="pais" className="form-label">
+                País <span className="required">*</span>
+              </label>
+              <select
+                id="pais"
+                name="pais"
+                value={paisOtro ? 'OTRO' : formData.pais}
+                onChange={e => {
+                  const value = e.target.value;
+                  if (value === 'OTRO') {
+                    setPaisOtro(true);
+                    setFormData(prev => ({ ...prev, pais: '' }));
+                  } else {
+                    setPaisOtro(false);
+                    setFormData(prev => ({ ...prev, pais: value }));
+                  }
+                  if (errors.pais) {
+                    setErrors(prev => ({ ...prev, pais: '' }));
+                  }
+                }}
+                className={`form-select ${errors.pais ? 'error' : ''}`}
+              >
+                <option value="">Seleccione un país</option>
+                {PAISES.map(pais => (
+                  <option key={pais} value={pais}>{pais}</option>
+                ))}
+                <option value="OTRO">Otro (escribir...)</option>
+              </select>
+              {paisOtro && (
+                <input
+                  type="text"
+                  id="paisOtro"
+                  name="pais"
+                  value={formData.pais}
+                  onChange={handleChange}
+                  className={`form-input ${errors.pais ? 'error' : ''}`}
+                  placeholder="Escriba el país"
+                  style={{ marginTop: 'var(--spacing-xs)' }}
+                />
+              )}
+              {errors.pais && (
+                <span className="form-error">{errors.pais}</span>
               )}
             </div>
 

@@ -6,6 +6,7 @@ import '../components/forms/FormularioBase.css';
 
 interface ReevaluacionFormData {
   nombreProveedor: string;
+  pais: string;
   identificacion: string;
   productoServicio: string;
   responsableReevaluacion: string;
@@ -26,6 +27,7 @@ const Formulario5 = () => {
   const [cargandoClientes, setCargandoClientes] = useState(false);
   const [formData, setFormData] = useState<ReevaluacionFormData>({
     nombreProveedor: '',
+    pais: '',
     identificacion: '',
     productoServicio: '',
     responsableReevaluacion: '',
@@ -99,6 +101,7 @@ const Formulario5 = () => {
         ...formData,
         responsableReevaluacion: '',
         nombreProveedor: '',
+        pais: '',
         identificacion: '',
         productoServicio: '',
       });
@@ -113,6 +116,7 @@ const Formulario5 = () => {
       setFormData({
         ...formData,
         nombreProveedor: clienteSeleccionado['NOMBRE DEL PROVEEDOR'] || '',
+        pais: clienteSeleccionado['PAIS'] || '',
         identificacion: clienteSeleccionado['IDENTIFICACIÓN'] || '',
         productoServicio: clienteSeleccionado['PRODUCTO / SERVICIO QUE SUMINISTRA'] || '',
       });
@@ -120,6 +124,7 @@ const Formulario5 = () => {
       setFormData({
         ...formData,
         nombreProveedor: '',
+        pais: '',
         identificacion: '',
         productoServicio: '',
       });
@@ -137,6 +142,10 @@ const Formulario5 = () => {
   const validateForm = (): boolean => {
     if (!formData.nombreProveedor.trim()) {
       setError('El nombre del proveedor es requerido');
+      return false;
+    }
+    if (!formData.pais.trim()) {
+      setError('El país del proveedor es requerido');
       return false;
     }
     if (!formData.identificacion.trim()) {
@@ -208,6 +217,7 @@ const Formulario5 = () => {
     setRegistroExitoso(false);
     setFormData({
       nombreProveedor: '',
+      pais: '',
       identificacion: '',
       productoServicio: '',
       responsableReevaluacion: '',
@@ -360,6 +370,19 @@ const Formulario5 = () => {
                 id="nombreProveedor"
                 name="nombreProveedor"
                 value={formData.nombreProveedor}
+                onChange={handleInputChange}
+                className="form-input"
+                required
+              />
+            </div>
+
+            <div className="form-group">
+              <label htmlFor="pais">País *</label>
+              <input
+                type="text"
+                id="pais"
+                name="pais"
+                value={formData.pais}
                 onChange={handleInputChange}
                 className="form-input"
                 required

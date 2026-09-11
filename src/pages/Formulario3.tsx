@@ -7,6 +7,7 @@ import '../components/forms/FormularioBase.css';
 interface SeguimientoFormData {
   cuatrimestre: string;
   nombreProveedor: string;
+  pais: string;
   identificacion: string;
   productoServicio: string;
   responsableSeguimiento: string;
@@ -50,6 +51,7 @@ const Formulario3 = () => {
   const [formData, setFormData] = useState<SeguimientoFormData>({
     cuatrimestre: '',
     nombreProveedor: '',
+    pais: '',
     identificacion: '',
     productoServicio: '',
     responsableSeguimiento: '',
@@ -128,6 +130,7 @@ const Formulario3 = () => {
         ...formData,
         responsableSeguimiento: '',
         nombreProveedor: '',
+        pais: '',
         identificacion: '',
         productoServicio: '',
       });
@@ -144,6 +147,7 @@ const Formulario3 = () => {
       setFormData({
         ...formData,
         nombreProveedor: clienteSeleccionado['NOMBRE DEL PROVEEDOR'] || '',
+        pais: clienteSeleccionado['PAIS'] || '',
         identificacion: clienteSeleccionado['IDENTIFICACIÓN'] || '',
         productoServicio: clienteSeleccionado['PRODUCTO / SERVICIO QUE SUMINISTRA'] || '',
         fechaSeleccion: convertirFechaExcel(clienteSeleccionado['FECHA DE SELECCIÓN']),
@@ -153,6 +157,7 @@ const Formulario3 = () => {
       setFormData({
         ...formData,
         nombreProveedor: '',
+        pais: '',
         identificacion: '',
         productoServicio: '',
         fechaSeleccion: '',
@@ -171,6 +176,10 @@ const Formulario3 = () => {
   const validateForm = (): boolean => {
     if (!formData.nombreProveedor.trim()) {
       setError('El nombre del proveedor es requerido');
+      return false;
+    }
+    if (!formData.pais.trim()) {
+      setError('El país del proveedor es requerido');
       return false;
     }
     if (!formData.identificacion.trim()) {
@@ -249,6 +258,7 @@ const Formulario3 = () => {
     setFormData({
       cuatrimestre: '',
       nombreProveedor: '',
+      pais: '',
       identificacion: '',
       productoServicio: '',
       responsableSeguimiento: '',
@@ -474,6 +484,19 @@ const Formulario3 = () => {
                 id="nombreProveedor"
                 name="nombreProveedor"
                 value={formData.nombreProveedor}
+                onChange={handleInputChange}
+                className="form-input"
+                required
+              />
+            </div>
+
+            <div className="form-group">
+              <label htmlFor="pais">País *</label>
+              <input
+                type="text"
+                id="pais"
+                name="pais"
+                value={formData.pais}
                 onChange={handleInputChange}
                 className="form-input"
                 required
