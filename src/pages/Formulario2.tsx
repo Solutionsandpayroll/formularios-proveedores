@@ -31,6 +31,7 @@ interface SeleccionFormData {
   referencias: string;
   experiencia: string;
   documentacion: string;
+  sgsst: string;
   // Datos de quien selecciona
   nombreSeleccionador: string;
   cargoSeleccionador: string;
@@ -67,6 +68,7 @@ const Formulario2 = () => {
     referencias: '',
     experiencia: '',
     documentacion: '',
+    sgsst: '',
     nombreSeleccionador: '',
     cargoSeleccionador: '',
     observaciones: '',
@@ -76,14 +78,15 @@ const Formulario2 = () => {
 
   const calcularPuntajeTotal = (data: SeleccionFormData): number => {
     const porcentajes = {
-      plazoPago: 0.15,        // 15%
+      plazoPago: 0.10,        // 10%
       precio: 0.15,           // 15%
       servicioNecesidad: 0.15, // 15%
       cumplimientoNormativo: 0.10, // 10%
       sistemaGestion: 0.10,   // 10%
-      referencias: 0.15,      // 15%
+      referencias: 0.10,      // 10%
       experiencia: 0.15,      // 15%
       documentacion: 0.05,    // 5%
+      sgsst: 0.10,            // 10%
     };
 
     const puntaje = (
@@ -94,7 +97,8 @@ const Formulario2 = () => {
       parseInt(data.sistemaGestion || '0') * porcentajes.sistemaGestion +
       parseInt(data.referencias || '0') * porcentajes.referencias +
       parseInt(data.experiencia || '0') * porcentajes.experiencia +
-      parseInt(data.documentacion || '0') * porcentajes.documentacion
+      parseInt(data.documentacion || '0') * porcentajes.documentacion +
+      parseInt(data.sgsst || '0') * porcentajes.sgsst
     );
 
     // Redondear a 2 decimales
@@ -175,6 +179,10 @@ const Formulario2 = () => {
       setError('Debe calificar la documentación');
       return false;
     }
+    if (!formData.sgsst) {
+      setError('Debe calificar el cumplimiento de los Estándares Mínimos del SG-SST');
+      return false;
+    }
     return true;
   };
 
@@ -217,6 +225,7 @@ const Formulario2 = () => {
       referencias: '',
       experiencia: '',
       documentacion: '',
+      sgsst: '',
       nombreSeleccionador: formData.nombreSeleccionador, // Mantener quien selecciona
       cargoSeleccionador: formData.cargoSeleccionador, // Mantener cargo
       observaciones: '',
@@ -286,7 +295,7 @@ const Formulario2 = () => {
   const descargarFormatoSeleccion = async (proveedor: ProveedorEvaluado) => {
     try {
       // Cargar el template Excel desde public
-      const response = await fetch('/Formato Seleccion.xlsx');
+      const response = await fetch('/Formato%20Selecci%C3%B3n%20V07.xlsx');
       const arrayBuffer = await response.arrayBuffer();
       
       // Leer el workbook con ExcelJS (preserva estilos, colores, imágenes)
@@ -311,50 +320,51 @@ const Formulario2 = () => {
       };
       const fechaFormateada = fecha.toLocaleDateString('es-ES', opciones);
       
-      worksheet.getCell('C4').value = fechaFormateada;
-      worksheet.getCell('A6').value = proveedor.nombreRazonSocial;
-      worksheet.getCell('A8').value = proveedor.direccion;
-      worksheet.getCell('E8').value = proveedor.ciudad;
-      worksheet.getCell('G8').value = proveedor.nit;
-      worksheet.getCell('A10').value = proveedor.bienServicio;
+      worksheet.getCell('C3').value = fechaFormateada;
+      worksheet.getCell('A5').value = proveedor.nombreRazonSocial;
+      worksheet.getCell('A7').value = proveedor.direccion;
+      worksheet.getCell('E7').value = proveedor.ciudad;
+      worksheet.getCell('G7').value = proveedor.nit;
+      worksheet.getCell('A9').value = proveedor.bienServicio;
       
       // Datos de contacto
-      worksheet.getCell('A14').value = proveedor.nombreContacto;
-      worksheet.getCell('E14').value = proveedor.cargoContacto;
-      worksheet.getCell('A16').value = proveedor.correoContacto;
-      worksheet.getCell('E16').value = proveedor.celularContacto;
-      worksheet.getCell('G16').value = proveedor.telefonoContacto;
+      worksheet.getCell('A13').value = proveedor.nombreContacto;
+      worksheet.getCell('E13').value = proveedor.cargoContacto;
+      worksheet.getCell('A15').value = proveedor.correoContacto;
+      worksheet.getCell('E15').value = proveedor.celularContacto;
+      worksheet.getCell('G15').value = proveedor.telefonoContacto;
       
       // Tipo de proveedor
       if (proveedor.tipoProveedor === 'Persona Natural') {
-        worksheet.getCell('D18').value = 'X';
+        worksheet.getCell('D17').value = 'X';
       } else if (proveedor.tipoProveedor === 'Persona Jurídica') {
-        worksheet.getCell('G18').value = 'X';
+        worksheet.getCell('G17').value = 'X';
       }
       
       // Tipo (Servicio/Producto)
       if (proveedor.tipo === 'Servicio') {
-        worksheet.getCell('D19').value = 'X';
+        worksheet.getCell('D18').value = 'X';
       } else if (proveedor.tipo === 'Producto') {
-        worksheet.getCell('G19').value = 'X';
+        worksheet.getCell('G18').value = 'X';
       }
       
-      // Criterios de evaluación (F22 a F29)
-      worksheet.getCell('F22').value = parseInt(proveedor.plazoPago || '0');
-      worksheet.getCell('F23').value = parseInt(proveedor.precio || '0');
-      worksheet.getCell('F24').value = parseInt(proveedor.servicioNecesidad || '0');
-      worksheet.getCell('F25').value = parseInt(proveedor.cumplimientoNormativo || '0');
-      worksheet.getCell('F26').value = parseInt(proveedor.sistemaGestion || '0');
-      worksheet.getCell('F27').value = parseInt(proveedor.referencias || '0');
-      worksheet.getCell('F28').value = parseInt(proveedor.experiencia || '0');
-      worksheet.getCell('F29').value = parseInt(proveedor.documentacion || '0');
+      // Criterios de evaluación (F21 a F29)
+      worksheet.getCell('F21').value = parseInt(proveedor.plazoPago || '0');
+      worksheet.getCell('F22').value = parseInt(proveedor.precio || '0');
+      worksheet.getCell('F23').value = parseInt(proveedor.servicioNecesidad || '0');
+      worksheet.getCell('F24').value = parseInt(proveedor.cumplimientoNormativo || '0');
+      worksheet.getCell('F25').value = parseInt(proveedor.sistemaGestion || '0');
+      worksheet.getCell('F26').value = parseInt(proveedor.referencias || '0');
+      worksheet.getCell('F27').value = parseInt(proveedor.experiencia || '0');
+      worksheet.getCell('F28').value = parseInt(proveedor.documentacion || '0');
+      worksheet.getCell('F29').value = parseInt(proveedor.sgsst || '0');
       
       // Datos de quien selecciona
       worksheet.getCell('A32').value = proveedor.nombreSeleccionador;
       worksheet.getCell('D32').value = proveedor.cargoSeleccionador;
       
       // Observaciones
-      worksheet.getCell('A38').value = proveedor.observaciones;
+      worksheet.getCell('A36').value = proveedor.observaciones;
       
       // Generar el archivo Excel con todos los estilos preservados
       const buffer = await workbook.xlsx.writeBuffer();
@@ -422,11 +432,12 @@ const Formulario2 = () => {
       cumplimientoNormativo: '',
       sistemaGestion: '',
       referencias: '',
-      experiencia: '',
-      documentacion: '',
-      observaciones: '',
-    });
-  };
+       experiencia: '',
+       documentacion: '',
+      sgsst: '',
+       observaciones: '',
+     });
+   };
 
   if (registroExitoso) {
     return (
@@ -980,6 +991,23 @@ const Formulario2 = () => {
               <option value="3">Completo</option>
               <option value="2">Parcial</option>
               <option value="1">No tiene</option>
+            </select>
+          </div>
+
+          <div className="form-group">
+            <label htmlFor="sgsst">Cumplimiento de los Estándares Mínimos del SG-SST, de acyerdo a la Res. 0312 de 2019. *</label>
+            <select
+              id="sgsst"
+              name="sgsst"
+              value={formData.sgsst}
+              onChange={handleInputChange}
+              className="form-input"
+              required
+            >
+              <option value="">Seleccione una opción</option>
+              <option value="3">Cumplimiento con calificación del 90 al 100%</option>
+              <option value="2">Cumplimiento con calificación del 80 al 90%</option>
+              <option value="1">Cumplimiento con calificación menor al 80% o no lo tiene implementado</option>
             </select>
           </div>
         </div>
