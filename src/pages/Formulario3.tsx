@@ -585,9 +585,9 @@ const Formulario3 = () => {
               required
             >
               <option value="">Seleccione una opción</option>
-              <option value="Excelente Calidad">Excelente Calidad</option>
-              <option value="Calidad regular">Calidad regular</option>
-              <option value="Mala Calidad">Mala Calidad</option>
+              <option value="Excelente">Excelente</option>
+              <option value="Aceptable">Aceptable</option>
+              <option value="Mala">Mala</option>
             </select>
           </div>
         </div>
